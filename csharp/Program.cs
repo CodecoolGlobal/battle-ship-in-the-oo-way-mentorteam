@@ -14,20 +14,38 @@ namespace battleship_warmup_csharp
             while (true) {
                 System.Console.WriteLine(ocean);
     
-                System.Console.WriteLine("Provide x coordinate");
-                string x_input = Console.ReadLine();
-                System.Console.WriteLine("Provide y coordinate");
+                x = ReadCoordinate("X");
+                y = ReadCoordinate("Y");
 
-                string y_input = Console.ReadLine();
-
-                if (Int32.TryParse(x_input, out x) && Int32.TryParse(y_input, out y))
-                {
+                try {
                     if (ocean.Shoot(x, y))
                         System.Console.WriteLine("TRAFIONY!");
                     else
                         System.Console.WriteLine("PUDŁO!");
+                } catch (ArgumentException e) {
+                    System.Console.WriteLine(e);
                 }
-            }
+                    
+                }
         }
-    }
+
+        static int ReadCoordinate(string symbol) {
+
+        int coor;
+
+        Console.WriteLine("Provide " + symbol);
+        string input = Console.ReadLine();
+
+        while (Int32.TryParse(input, out coor) == false)
+        {
+            Console.WriteLine("Invalid input!");
+            Console.WriteLine("Provide " + symbol);
+            input = Console.ReadLine();
+        }
+        return coor;
+            
+        }
+
+        
+    }   
 }

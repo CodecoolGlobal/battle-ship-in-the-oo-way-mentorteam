@@ -39,7 +39,7 @@ public class Main {
                 System.out.println("Provide " + symbol);
                 coor = sc.nextInt();
             } catch (InputMismatchException e) {
-                e.printStackTrace();
+                System.out.println("Invalid input!");
                 sc.nextLine();
             }
         return coor;
