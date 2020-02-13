@@ -12,21 +12,12 @@ public class Main {
             System.out.println(e);
         }
         
-        Scanner sc = new Scanner(System.in);
+        int x, y;
 
         while (true) {
             System.out.println(ocean);
-
-            try { 
-                System.out.println("Provide x coordinate");
-                int x = sc.nextInt();
-                System.out.println("Provide y coordinate");
-                int y = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println(e);
-            }
-            
-
+            x = readCoordinate("X");
+            y = readCoordinate("Y");
             try {
                 if (ocean.shoot(x, y))
                     System.out.println("TRAFIONY!");
@@ -37,4 +28,21 @@ public class Main {
             }
         }
     }
+
+    public static int readCoordinate(String symbol) {
+        
+        Scanner sc = new Scanner(System.in);
+        Integer coor = null;
+
+        while (coor == null)
+            try { 
+                System.out.println("Provide " + symbol);
+                coor = sc.nextInt();
+            } catch (InputMismatchException e) {
+                e.printStackTrace();
+                sc.nextLine();
+            }
+        return coor;
+        }
+
 }
