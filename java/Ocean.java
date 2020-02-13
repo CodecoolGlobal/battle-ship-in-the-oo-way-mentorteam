@@ -33,9 +33,9 @@ public class Ocean{
         
         List<Square> squares = new ArrayList<Square>();
         for (int i = 0 ; i < shipLength ; i++)
-            squares.add(this.board.get(y).get(x + i));
+            squares.add(board.get(y).get(x + i));
         
-        this.ships.add(new Ship(squares));
+        ships.add(new Ship(squares));
         System.out.println(ships);
         return true;
     }
@@ -46,11 +46,11 @@ public class Ocean{
         if (y < 0 || y >= HEIGHT)
             throw new IllegalArgumentException("y coordinate should be in range 0..9");
 
-        Square square = this.board.get(x).get(y);
+        Square square = board.get(x).get(y);
         
         square.shoot();
 
-        for (Ship ship : this.ships) {
+        for (Ship ship : ships) {
 
             if (ship.contains(square)) {
                 square.setSymbol("X");
@@ -66,7 +66,7 @@ public class Ocean{
 
         String str = " 12345678910\n";
         char alpha = 97;
-        for (ArrayList<Square> row : this.board) {
+        for (ArrayList<Square> row : board) {
             str = str + alpha;
             for (Square square : row) {
                 str = str + square.toString();

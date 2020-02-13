@@ -33,9 +33,9 @@ namespace battleship_warmup_csharp
             
             List<Square> squares = new List<Square>();
             for (int i = 0 ; i < shipLength ; i++)
-                squares.Add(this.board[y][x + i]);
+                squares.Add(board[y][x + i]);
             
-            this.ships.Add(new Ship(squares));
+            ships.Add(new Ship(squares));
             System.Console.WriteLine(ships);
             return true;
         }
@@ -46,11 +46,11 @@ namespace battleship_warmup_csharp
             if (y < 0 || y >= HEIGHT)
                 throw new ArgumentException("y coordinate should be in range 0..9");
 
-            Square square = this.board[x][y];
+            Square square = board[x][y];
             
             square.shoot();
 
-            foreach (Ship ship in this.ships) {
+            foreach (Ship ship in ships) {
 
                 if (ship.Contains(square)) {
                     square.SetSymbol("X");
@@ -66,7 +66,7 @@ namespace battleship_warmup_csharp
 
             string str = " 12345678910\n";
             int ascii = 97;
-            foreach (List<Square> row in this.board) {
+            foreach (List<Square> row in board) {
                 str = str + (char)ascii;
                 foreach (Square square in row) {
                     str = str + square.ToString();

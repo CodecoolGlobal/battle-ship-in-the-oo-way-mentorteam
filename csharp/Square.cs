@@ -17,7 +17,7 @@ namespace battleship_warmup_csharp
             this.isHit = true;
         }
         public bool IsHit() {
-            return this.isHit;
+            return isHit;
 
         }
         public void SetSymbol (string symbol) {

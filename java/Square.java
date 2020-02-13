@@ -13,7 +13,7 @@ public class Square{
     }
 
     public boolean isHit() {
-        return this.isHit;
+        return isHit;
 
     }
 
