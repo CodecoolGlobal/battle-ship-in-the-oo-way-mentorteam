@@ -23,7 +23,7 @@ public class Ocean{
         }
     }
 
-    public boolean addShip(int shipLength, int x, int y) { 
+    public boolean addShip(int shipLength, int x, int y) throws IllegalArgumentException { 
         if (x < 0 || x >= WIDTH)
             throw new IllegalArgumentException("x coordinate should be in range 0..9");
         if (y < 0 || y >= HEIGHT)
@@ -40,7 +40,7 @@ public class Ocean{
         return true;
     }
 
-    public boolean shoot(int x, int y) {
+    public boolean shoot(int x, int y) throws IllegalArgumentException {
         if (x < 0 || x >= WIDTH)
             throw new IllegalArgumentException("x coordinate should be in range 0..9");
         if (y < 0 || y >= HEIGHT)
