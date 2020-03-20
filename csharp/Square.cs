@@ -1,31 +1,24 @@
 
 namespace battleship_warmup_csharp
 {
-    class Square
+    public class Square
     {
-        private bool isHit;
-        private string symbol;
+        public bool IsHit { get; private set; }
+        public string Symbol { get; set; }
 
         public Square()
         {
-            this.isHit = false;
-            this.symbol = "*";
+            IsHit = false;
+            Symbol = "*";
         }
 
-        public void shoot()
+        public void Shoot()
         {
-            this.isHit = true;
+            IsHit = true;
         }
-        public bool IsHit() {
-            return isHit;
 
-        }
-        public void SetSymbol (string symbol) {
-            this.symbol = symbol;
-        }
-    
         public override string ToString() {
-            return symbol;
+            return Symbol;
         }
     }
 }

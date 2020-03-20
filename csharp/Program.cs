@@ -2,50 +2,43 @@
 
 namespace battleship_warmup_csharp
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {   
-            Ocean ocean = new Ocean();
+            var ocean = new Ocean();
             ocean.AddShip(3, 0, 2);
             ocean.AddShip(4, 5, 8);
-            int x, y;
 
             while (true) {
-                System.Console.WriteLine(ocean);
+                Console.WriteLine(ocean);
     
-                x = ReadCoordinate("X");
-                y = ReadCoordinate("Y");
+                var x = ReadCoordinate("X");
+                var y = ReadCoordinate("Y");
 
-                try {
-                    if (ocean.Shoot(x, y))
-                        System.Console.WriteLine("TRAFIONY!");
-                    else
-                        System.Console.WriteLine("PUDŁO!");
+                try
+                {
+                    Console.WriteLine(ocean.Shoot(x, y) ? "TRAFIONY!" : "PUDŁO!");
                 } catch (ArgumentException e) {
-                    System.Console.WriteLine(e);
+                    Console.WriteLine(e);
                 }
-                    
-                }
+            }
         }
 
-        static int ReadCoordinate(string symbol) {
+        private static int ReadCoordinate(string symbol) {
+            int coor;
 
-        int coor;
-
-        Console.WriteLine("Provide " + symbol);
-        string input = Console.ReadLine();
-
-        while (Int32.TryParse(input, out coor) == false)
-        {
-            Console.WriteLine("Invalid input!");
             Console.WriteLine("Provide " + symbol);
-            input = Console.ReadLine();
-        }
-        return coor;
-            
-        }
+            var input = Console.ReadLine();
 
-        
+            while (int.TryParse(input, out coor) == false)
+            {
+                Console.WriteLine("Invalid input!");
+                Console.WriteLine("Provide " + symbol);
+                input = Console.ReadLine();
+            }
+
+            return coor;
+        }
     }   
 }

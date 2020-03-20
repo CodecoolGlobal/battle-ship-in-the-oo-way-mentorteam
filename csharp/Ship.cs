@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 
 namespace battleship_warmup_csharp
-{    
-    class Ship {
-        private List<Square> squares;
+{
+    public class Ship {
+        private readonly List<Square> _squares;
 
         public Ship(List<Square> squares)
         {
-            this.squares = squares;
+            _squares = squares;
         }
 
         public bool Contains(Square square) 
         {
-            return squares.Contains(square);
+            return _squares.Contains(square);
         }
     }
 }

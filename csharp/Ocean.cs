@@ -1,77 +1,75 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace battleship_warmup_csharp
 {
     public class Ocean{
 
-        public static readonly int WIDTH = 10;
-        public static readonly int HEIGHT = 10;
-        private List<List<Square>> board;
-        private List<Ship> ships;
+        public static readonly int Width = 10;
+        public static readonly int Height = 10;
+        private readonly List<List<Square>> _board;
+        private readonly List<Ship> _ships;
 
         public Ocean(){
-            board = new List<List<Square>>();
-            ships = new List<Ship>();
+            _board = new List<List<Square>>();
+            _ships = new List<Ship>();
 
-            List<Square> row;
-            for (int i = 0; i < HEIGHT; i++){
-                row = new List<Square>();
-                for (int j = 0; j < WIDTH; j++){
+            for (var i = 0; i < Height; i++){
+                var row = new List<Square>();
+                for (var j = 0; j < Width; j++){
                     row.Add(new Square());
                 }
-                board.Add(row);
+                _board.Add(row);
             }
         }
 
         public bool AddShip(int shipLength, int x, int y) { 
-            if (x < 0 || x >= WIDTH)
+            if (x < 0 || x >= Width)
                 throw new ArgumentException("x coordinate should be in range 0..9");
-            if (y < 0 || y >= HEIGHT)
+            if (y < 0 || y >= Height)
                 throw new ArgumentException("y coordinate should be in range 0..9");
             if (shipLength < 1 || shipLength > 4)
                 throw new ArgumentException();
             
-            List<Square> squares = new List<Square>();
-            for (int i = 0 ; i < shipLength ; i++)
-                squares.Add(board[y][x + i]);
+            var squares = new List<Square>();
+            for (var i = 0 ; i < shipLength ; i++)
+                squares.Add(_board[y][x + i]);
             
-            ships.Add(new Ship(squares));
-            System.Console.WriteLine(ships);
+            _ships.Add(new Ship(squares));
+            Console.WriteLine(_ships);
             return true;
         }
 
         public bool Shoot(int x, int y) {
-            if (x < 0 || x >= WIDTH)
+            if (x < 0 || x >= Width)
                 throw new ArgumentException("x coordinate should be in range 0..9");
-            if (y < 0 || y >= HEIGHT)
+            if (y < 0 || y >= Height)
                 throw new ArgumentException("y coordinate should be in range 0..9");
 
-            Square square = board[x][y];
+            var square = _board[x][y];
             
-            square.shoot();
+            square.Shoot();
 
-            foreach (Ship ship in ships) {
-
-                if (ship.Contains(square)) {
-                    square.SetSymbol("X");
-                    return true;
-                }
+            if (_ships.Any(ship => ship.Contains(square)))
+            {
+                square.Symbol = "X";
+                return true;
             }
-            square.SetSymbol("O");
+
+            square.Symbol = "O";
             return false;
 
         }
         
         public override string ToString(){
 
-            string str = " 12345678910\n";
-            int ascii = 97;
-            foreach (List<Square> row in board) {
-                str = str + (char)ascii;
-                foreach (Square square in row) {
-                    str = str + square.ToString();
-                }
-                str  = str + "\n";
+            var str = " 12345678910\n";
+            var ascii = 97;
+            foreach (var row in _board) {
+                str += (char)ascii;
+                str = row.Aggregate(str, (current, square) => current + square);
+                str += "\n";
                 ascii++;
             }
             return str;
